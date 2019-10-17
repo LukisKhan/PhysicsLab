@@ -24,4 +24,4 @@ The following technologies are used:
 
 ## Bonus Feature
 
-Each topic/equation will add a new feature, completing an introductory physics 1 course is the goal. Adding any equation from physics 2 are bonus.
+Each topic/equation is a stand alone feature, completing an introductory Physics 1 course is the goal. Adding any equations from Physics 2 are bonuses.

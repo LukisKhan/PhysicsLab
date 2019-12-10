@@ -3,8 +3,12 @@
   "version": "1.0.0",
   "description": "## Background",
   "main": "index.js",
+  "dependencies": {
+    "webpack": "^4.41.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "webpack",
+    "webpack": "webpack --watch --mode=development"
   },
   "repository": {
     "type": "git",
@@ -15,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/LukisKhan/PhysicsLab/issues"
   },
-  "homepage": "https://github.com/LukisKhan/PhysicsLab#readme"
+  "homepage": "https://github.com/LukisKhan/PhysicsLab#readme",
+  "devDependencies": {
+    "webpack-cli": "^3.3.10"
+  }
 }

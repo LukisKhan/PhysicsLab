@@ -1,11 +1,13 @@
 const submitForm = require('./submitForm');
 const submitAccelForm = require('./submitAccelForm');
+const drawAxis = require('./drawAxis');
 
 function displayWindow (canvas) {
   const topicList = document.querySelector('.topics');
   const topicWindows = document.querySelectorAll('.topic-window');
-  let currentWindow = "";
-  let ctx;
+  let currentWindow = "velocity";
+  let ctx = canvas.getContext("2d");
+  drawAxis(ctx, width, height);
   topicList.addEventListener('click', function (e) {
     if (e.target.tagName == 'LI') {
       const topicClicked = document.querySelector(e.target.dataset.topic)
@@ -19,15 +21,19 @@ function displayWindow (canvas) {
       })
       switch(currentWindow) {
         case "velocity":
-          ctx = canvas.getContext("2d");
+          console.log("vel case");
+          // ctx = canvas.getContext("2d");
           submitForm(ctx);
           break;
         case "acceleration":
-          ctx = canvas.getContext("2d");
+          console.log("accel case");
+          // ctx = canvas.getContext("2d");
           submitAccelForm(ctx);
           break;
         default:
-          submitAccelForm(ctx);
+          console.log("default case");
+          // ctx = canvas.getContext("2d");
+          submitForm(ctx);
       }
     }
   })

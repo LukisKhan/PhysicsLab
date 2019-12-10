@@ -3,11 +3,16 @@
   width: 100vw;
   height: 100vh;
   border: 1px solid black;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
 }
 .side-bar{
   display: block;
   background-color: lightblue;
   justify-content: center;
+  border-radius: 2%;
 }
 
 .side-bar ul {
@@ -20,6 +25,7 @@
   width: 20vw;
   background-color: darkcyan;
   margin: 10px;
+  border-radius: 5%;
 }
 .main-content {
   width: 100%;
@@ -28,7 +34,12 @@
 }
 .equation {
   background-color: rgb(30, 165, 136);
-  width: 100%;
+  width: 50%;
+  border-radius: 5%;
+  margin: 0px 20px 20px 250px;
+  padding: 20px;
+  font-size: 20px;
+  justify-content: center;
 }
 .topic-window {
   display: none;
@@ -43,6 +54,8 @@
   border: 2px solid black;
   width: 250px;
   margin: 30px;
+  border-radius: 5%;
+  background-color: lightcoral;
 }
 /* .input-window label{
   display: block;
@@ -51,10 +64,15 @@
   border: 2px solid black;
   width: 250px;
   margin: 30px;
+  border-radius: 5%;
+  background-color: goldenrod;
+}
+input {
+  background-color: thistle;
 }
 canvas{
-  width: 100%;
-  height: 65%;
+  /* width: 100%;
+  height: 65%; */
   background-color: rgb(0, 255, 136);
   border: 1px solid black;
 }

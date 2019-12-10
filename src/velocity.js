@@ -12,13 +12,13 @@ function velocity (ctx, particle) {
     let posX = particle.pos[0];
     let posY = particle.pos[1];
     ctx.beginPath();
-    ctx.arc(posX, posY, 6, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.arc(posX, posY, 12, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
-    if (particle.pos[0] > 300 || particle.pos[1] > 300 ) {
-      cancelAnimationFrame(animationId);
-    }
+    // if (particle.pos[0] > 300 || particle.pos[1] > 300 ) {
+    //   cancelAnimationFrame(animationId);
+    // }
   }
-  animate()
+  animate();
 }
 
 

@@ -6,7 +6,7 @@ function submitAccelForm(ctx) {
     e.preventDefault();
     let particle = { pos: [], vel: [], accel: [] };
     const posValues = inputForm.querySelectorAll("#pos").forEach(valueNode => {
-      console.log(valueNode);
+      // console.log(valueNode);
       particle.pos.push(parseInt(valueNode.value) || 0)
     });
     const velValues = inputForm.querySelectorAll("#vel").forEach(valueNode => {
@@ -15,7 +15,7 @@ function submitAccelForm(ctx) {
     const accelValues = inputForm.querySelectorAll("#accel").forEach(valueNode => {
       particle.accel.push(parseInt(valueNode.value) || 0)
     });
-    ctx.clearRect(0, 0, 400, 400)
+    ctx.clearRect(0, 0, 2000, 2000)
     acceleration(ctx, particle);
   })
 }

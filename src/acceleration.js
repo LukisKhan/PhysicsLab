@@ -1,6 +1,6 @@
 const particle = require('./particle');
 
-function velocity(ctx, particle) {
+function acceleration(ctx, particle) {
   // let particles = Array(1)
   //   .fill(true)
   //   .map(() => particle([0,100], [1,0], [.8,0]) )
@@ -9,7 +9,7 @@ function velocity(ctx, particle) {
     let { pos, vel, accel } = particle;
     pos = [pos[0] + vel[0], pos[1] + vel[1]]
     vel = [vel[0] + accel[0], vel[1] + accel[1]]
-    console.log(particle);
+    // console.log(particle);
     return { ...particle, pos, vel };
   }
   const animate = () => {
@@ -20,9 +20,10 @@ function velocity(ctx, particle) {
     ctx.beginPath();
     ctx.arc(posX, posY, 6, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
-    if (particle.pos[0] > 300 || particle.pos[1] > 300) {
-      cancelAnimationFrame(animationId);
-    }
+    // ctx.fillText(`${posX}`, posX, posY);
+    // if (particle.pos[0] > 700 || particle.pos[1] > 700) {
+    //   cancelAnimationFrame(animationId);
+    // }
   }
   animate()
 }
@@ -33,4 +34,4 @@ function velocity(ctx, particle) {
 //   })
 // }
 
-module.exports = velocity;
+module.exports = acceleration;

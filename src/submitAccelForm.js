@@ -1,7 +1,7 @@
 const acceleration = require('./acceleration');
 
 function submitAccelForm(ctx) {
-  const inputForm = document.forms['inputs'];
+  const inputForm = document.forms['accel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let particle = { pos: [], vel: [], accel: [] };

@@ -7,7 +7,8 @@ function displayWindow (canvas) {
   const topicWindows = document.querySelectorAll('.topic-window');
   let currentWindow = "velocity";
   let ctx = canvas.getContext("2d");
-  drawAxis(ctx, width, height);
+  // don't draw axis until topic has been picked
+  // drawAxis(ctx, width, height);
   topicList.addEventListener('click', function (e) {
     if (e.target.tagName == 'LI') {
       const topicClicked = document.querySelector(e.target.dataset.topic)

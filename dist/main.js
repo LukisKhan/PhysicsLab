@@ -147,9 +147,11 @@ const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
 function displayWindow (canvas) {
   const topicList = document.querySelector('.topics');
   const topicWindows = document.querySelectorAll('.topic-window');
+  const equation = document.getElementById('equation');
   let currentWindow = "velocity";
   let ctx = canvas.getContext("2d");
-  drawAxis(ctx, width, height);
+  // don't draw axis until topic has been picked
+  // drawAxis(ctx, width, height);
   topicList.addEventListener('click', function (e) {
     if (e.target.tagName == 'LI') {
       const topicClicked = document.querySelector(e.target.dataset.topic)
@@ -157,10 +159,12 @@ function displayWindow (canvas) {
         if (topicWindow == topicClicked) {
           topicWindow.classList.add('active');
           currentWindow = topicWindow.classList[1];
+          console.log(topicClicked);
+          equation.innerText = `${currentWindow}`;
         } else {
           topicWindow.classList.remove('active');
         }
-      })
+      });
       switch(currentWindow) {
         case "velocity":
           console.log("vel case");
@@ -192,18 +196,50 @@ module.exports = displayWindow;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-const drawAxis = (ctx, width, height) => {
-  ctx.lineWidth = 2;
-  ctx.moveTo(50, 25);
-  ctx.lineTo(50, 360);
-  ctx.lineTo(760, 360);
+const drawAxis = (ctx, xAxis = "Time", yAxis = "Distance", width = 400, height = 400) => {
+  ctx.lineWidth = 1;
+  ctx.moveTo(50, 50);
+  // 0,0 origin is at 50, 360
+  // end origin is at 360, 25
+  // grid is 350 px by 350px starting at 50, 400 (0,0) and ends at 400, 50
+  ctx.lineTo(50, height / (height / 350) + 50 );
+  ctx.lineTo(width / (width / 350) + 50 , height / (height / 350) + 50);
   ctx.stroke();
-  ctx.strokeText("0,0", 30, 370);
-  ctx.strokeText(`${width}`, width - 50, 370);
-  ctx.strokeText(`${height}`, 30, 30);
-
+  ctx.lineWidth = 0.5;
+  for(let i = 1; i < 10; i ++) {
+    ctx.moveTo(50, 400 - (35 * i));
+    ctx.lineTo(400, 400 - (35 * i));
+  }
+  for (let j = 1; j < 10; j++) {
+    ctx.moveTo(50 + (35 * j), 50);
+    ctx.lineTo(50 + (35 * j), 400);
+  }
+  ctx.stroke();
+  ctx.lineWidth = 1;
+  ctx.strokeText("0,0", 30, 420);
+  ctx.strokeText(`${width}`, 400, 420);
+  ctx.strokeText(`${height}`, 30, 50);
+  ctx.strokeText(`${xAxis}`, 200, 420);
+  ctx.strokeText(`${yAxis}`, 5, 200);
+  
 }
+
 module.exports = drawAxis;
+
+/***/ }),
+
+/***/ "./src/drawUneven.js":
+/*!***************************!*\
+  !*** ./src/drawUneven.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const drawUneven = (ctx) => {
+  ctx.strokeText("UNEVEN AXISES", 180, 440);
+}
+
+module.exports = drawUneven;
 
 /***/ }),
 
@@ -220,9 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let canvas = document.querySelector('canvas');
   // canvas.height = window.innerHeight;
   // canvas.width = window.innerWidth;
-  canvas.height = 400;
-  canvas.width = 800;
-  displayWindow(canvas, width = 800, height = 400);
+  canvas.height = 450;
+  canvas.width = 450;
+  displayWindow(canvas);
 })
 
 /***/ }),
@@ -263,7 +299,7 @@ module.exports = particle
 const acceleration = __webpack_require__(/*! ./acceleration */ "./src/acceleration.js");
 
 function submitAccelForm(ctx) {
-  const inputForm = document.forms['inputs'];
+  const inputForm = document.forms['accel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let particle = { pos: [], vel: [], accel: [] };
@@ -299,9 +335,13 @@ module.exports = submitAccelForm;
 /***/ (function(module, exports, __webpack_require__) {
 
 const velocity = __webpack_require__(/*! ./velocity */ "./src/velocity.js");
+const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
+const drawUneven = __webpack_require__(/*! ./drawUneven */ "./src/drawUneven.js");
 
 function submitForm (ctx) {
-  const inputForm = document.forms['inputs'];
+  ctx.clearRect(0, 0, 2000, 2000);
+  drawAxis(ctx, "Time", "Distance");
+  const inputForm = document.forms['vel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let particle = {pos: [], vel: []};
@@ -311,8 +351,30 @@ function submitForm (ctx) {
     const velValues = inputForm.querySelectorAll("#vel").forEach(valueNode => {
       particle.vel.push(parseInt(valueNode.value) || 0)
     });
-    ctx.clearRect(0, 0, 2000, 2000)
-    velocity(ctx, particle);
+    let distance = inputForm.elements.distance.value;
+    let time = inputForm.elements.time.value;
+    let vel = inputForm.elements.velocity.value;
+
+    let velocityAns = distance / time;
+    // console.log(velocityAns, "velocity")
+    particle = { pos: [50, 400], vel: [1,-velocityAns]}
+    if( velocityAns * 10 > 350) {
+      ctx.clearRect(0, 0, 2000, 2000);
+      drawAxis(ctx, "Time", "Distance", 10, velocityAns * 10);
+      drawUneven(ctx);
+      velocity(ctx, particle, 10, velocityAns * 10);
+    } else if (1/velocityAns * 10 > 350) {
+      ctx.clearRect(0, 0, 2000, 2000);
+      particle.vel = [velocityAns, -1];
+      drawAxis(ctx, "Time", "Distance", 1/velocityAns * 10, 10);
+      drawUneven(ctx);
+      velocity(ctx, particle, 1/velocityAns * 10, 10)
+    }
+    else {
+      ctx.clearRect(0, 0, 2000, 2000);
+      drawAxis(ctx, "Time", "Distance", 400, 400);
+      velocity(ctx, particle);
+    }
   })
 }
 module.exports = submitForm;
@@ -328,29 +390,51 @@ module.exports = submitForm;
 
 const particle = __webpack_require__(/*! ./particle */ "./src/particle.js");
 
-function velocity (ctx, particle) {
+function velocity (ctx, particle, maxX = 400, maxY = 400) {
+  // console.log(particle)
   const updatePos = (particle) => {
     let {pos, vel, accel }= particle;
-    pos = [pos[0] + vel[0], pos[1] + vel[1]]
+    //if Y values are so large, zoom out on Y-axis, zoom in to x-axis
+    if(maxY > 400) {
+      pos = [pos[0] + (vel[0] / 10) * 350 , pos[1] + (vel[1] / maxY) * 350 ];
+    } else if (maxX > 400) {
+      pos = [pos[0] + (1/vel[0] / maxX) * 350, pos[1] + (vel[1] / 10) * 350];
+    }
+    else {
+      pos = [pos[0] + vel[0], pos[1] + vel[1]];
+    }
     return { ...particle, pos};
   }
   const animate = () => {
     let animationId = requestAnimationFrame(animate);
+    let prevPos = particle.pos;
+    // console.log("prevPos", prevPos);
     particle = updatePos(particle)
     let posX = particle.pos[0];
     let posY = particle.pos[1];
-    ctx.beginPath();
-    ctx.arc(posX, posY, 12, 0 * Math.PI, 2 * Math.PI, true);
+    // console.log("currentPos", particle.pos);
+    ctx.moveTo(prevPos[0], prevPos[1]);
+    ctx.lineTo(particle.pos[0], particle.pos[1]);
     ctx.stroke();
-    // if (particle.pos[0] > 300 || particle.pos[1] > 300 ) {
-    //   cancelAnimationFrame(animationId);
-    // }
+    ctx.beginPath();
+    ctx.arc(posX, posY, 2, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.stroke();
+    // ctx.lineTo(prevPos);
+    if (particle.pos[0] > 399 || particle.pos[1] < 51 ) {
+      cancelAnimationFrame(animationId);
+    }
   }
   animate();
 }
 
 
 module.exports = velocity;
+
+//onclick even bound to LI instead of submit button
+//particle properties
+//dynamic width and height
+//intuitive input
+//clear out input values when switching between forms
 
 /***/ })
 

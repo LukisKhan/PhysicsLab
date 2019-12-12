@@ -4,7 +4,7 @@ const drawUneven = require('./drawUneven');
 
 function submitForm (ctx) {
   ctx.clearRect(0, 0, 2000, 2000);
-  drawAxis(ctx, "Time", "Distance", 800, 800);
+  drawAxis(ctx, "Time", "Distance");
   const inputForm = document.forms['vel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();

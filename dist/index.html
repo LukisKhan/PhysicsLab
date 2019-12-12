@@ -12,20 +12,41 @@
   <div id="root">
     <div class="side-bar">
       <ul class="topics">
-        <li class="active" data-topic=".velocity">Velocity</li>
+        <li data-topic=".velocity">Velocity</li>
         <li data-topic=".acceleration">Acceleration</li>
         <li data-topic=".gravity">Gravity</li>
         <li data-topic=".projectile">Projectile Motion</li>
       </ul>
     </div>
     <div class="main-content">
-      <div class="equation">velocity = distance / time</div>
-      <canvas id="my-canvas"></canvas>
+      <div id="equation" class="equation">Pick an topic</div>
       <!-- <form id="inputs"> -->
         <div class="topic-windows">
-          <div class="topic-window velocity active" >
+          <div class="topic-window velocity" >
             <div class="forms input-window">
               <form name="vel-inputs">
+                <!-- <label>Position X</label>
+                <input type="text" id="pos">
+                <label>Position Y</label>
+                <input type="text" id="pos">
+                <label>Velocity X</label>
+                <input type="text" id="vel">
+                <label>Velocity Y</label>
+                <input type="text" id="vel"> -->
+                <label>Distance</label>
+                <input type="text" id="distance">
+                <label>TimeTotal</label>
+                <input type="text" id="time">
+                <label>Velocity</label>
+                <input type="text" id="velocity">
+                <button>Submit</button>
+              </form>
+              <!-- <form id="demo">
+                <button>Demo</button>
+              </form> -->
+            </div>
+            <!-- <div class="output-window">
+              <div class="forms">
                 <label>Position X</label>
                 <input type="text" id="pos">
                 <label>Position Y</label>
@@ -34,12 +55,24 @@
                 <input type="text" id="vel">
                 <label>Velocity Y</label>
                 <input type="text" id="vel">
-                <label>Distance</label>
-                <input type="text" id="distance">
-                <label>TimeTotal</label>
-                <input type="text" id="time">
-                <label>Velocity</label>
-                <input type="text" id="velocity">
+              </div>
+            </div> -->
+          </div>
+          <div class="topic-window acceleration" >
+            <div class="forms input-window">
+              <form name="accel-inputs">
+                <label>Position X</label>
+                <input type="text" id="pos">
+                <label>Position Y</label>
+                <input type="text" id="pos">
+                <label>Velocity X</label>
+                <input type="text" id="vel">
+                <label>Velocity Y</label>
+                <input type="text" id="vel">
+                <label>Acceleration X</label>
+                <input type="text" id="accel">
+                <label>Acceleration Y</label>
+                <input type="text" id="accel">
                 <button>Submit</button>
               </form>
               <form id="demo">
@@ -59,45 +92,12 @@
               </div>
             </div>
           </div>
-          <div class="topic-window acceleration" >
-            <div class="forms input-window">
-              <form name="accel-inputs">
-                <label>Position X</label>
-                <input type="text" id="pos">
-                <label>Position Y</label>
-                <input type="text" id="pos">
-                <label>Velocity X</label>
-                <input type="text" id="vel">
-                <label>Velocity Y</label>
-                <input type="text" id="vel">
-                <label>Acceleration X</label>
-                <input type="text" id="accel">
-                <label>Acceleration Y</label>
-                <input type="text" id="accel">
-                <button>Submit</button>
-              </form>
-                <form id="demo">
-                <button>Demo</button>
-              </form>
-            </div>
-            <div class="output-window">
-              <div class="forms">
-                <label>Position X</label>
-                <input type="text" id="pos">
-                <label>Position Y</label>
-                <input type="text" id="pos">
-                <label>Velocity X</label>
-                <input type="text" id="vel">
-                <label>Velocity Y</label>
-                <input type="text" id="vel">
-              </div>
-            </div>
-          </div>
           <div class="topic-window gravity" >Gravity window</div>
           <div class="topic-window projectile" >Projectile window</div>
         </div>
-      <!-- </form> -->
+        <!-- </form> -->
+        <canvas id="my-canvas"></canvas>
+      </div>
     </div>
-  </div>
-</body>
-</html>
+  </body>
+  </html>

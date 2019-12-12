@@ -147,6 +147,7 @@ const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
 function displayWindow (canvas) {
   const topicList = document.querySelector('.topics');
   const topicWindows = document.querySelectorAll('.topic-window');
+  const equation = document.getElementById('equation');
   let currentWindow = "velocity";
   let ctx = canvas.getContext("2d");
   // don't draw axis until topic has been picked
@@ -158,10 +159,12 @@ function displayWindow (canvas) {
         if (topicWindow == topicClicked) {
           topicWindow.classList.add('active');
           currentWindow = topicWindow.classList[1];
+          console.log(topicClicked);
+          equation.innerText = `${currentWindow}`;
         } else {
           topicWindow.classList.remove('active');
         }
-      })
+      });
       switch(currentWindow) {
         case "velocity":
           console.log("vel case");
@@ -203,13 +206,13 @@ const drawAxis = (ctx, xAxis = "Time", yAxis = "Distance", width = 400, height =
   ctx.lineTo(width / (width / 350) + 50 , height / (height / 350) + 50);
   ctx.stroke();
   ctx.lineWidth = 0.5;
-  for(let i = 1; i < 35; i ++) {
-    ctx.moveTo(50, 400 - (10 * i));
-    ctx.lineTo(400, 400 - (10 * i));
+  for(let i = 1; i < 10; i ++) {
+    ctx.moveTo(50, 400 - (35 * i));
+    ctx.lineTo(400, 400 - (35 * i));
   }
-  for (let j = 1; j < 35; j++) {
-    ctx.moveTo(50 + (10 * j), 50);
-    ctx.lineTo(50 + (10 * j), 400);
+  for (let j = 1; j < 10; j++) {
+    ctx.moveTo(50 + (35 * j), 50);
+    ctx.lineTo(50 + (35 * j), 400);
   }
   ctx.stroke();
   ctx.lineWidth = 1;
@@ -233,7 +236,7 @@ module.exports = drawAxis;
 /***/ (function(module, exports) {
 
 const drawUneven = (ctx) => {
-  ctx.strokeText("UNEVEN AXISES", 180, 460);
+  ctx.strokeText("UNEVEN AXISES", 180, 440);
 }
 
 module.exports = drawUneven;
@@ -253,9 +256,9 @@ document.addEventListener('DOMContentLoaded', () => {
   let canvas = document.querySelector('canvas');
   // canvas.height = window.innerHeight;
   // canvas.width = window.innerWidth;
-  canvas.height = 500;
-  canvas.width = 500;
-  displayWindow(canvas, width = 800, height = 400);
+  canvas.height = 450;
+  canvas.width = 450;
+  displayWindow(canvas);
 })
 
 /***/ }),
@@ -337,7 +340,7 @@ const drawUneven = __webpack_require__(/*! ./drawUneven */ "./src/drawUneven.js"
 
 function submitForm (ctx) {
   ctx.clearRect(0, 0, 2000, 2000);
-  drawAxis(ctx, "Time", "Distance", 800, 800);
+  drawAxis(ctx, "Time", "Distance");
   const inputForm = document.forms['vel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();

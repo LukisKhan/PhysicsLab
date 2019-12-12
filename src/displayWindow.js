@@ -5,6 +5,7 @@ const drawAxis = require('./drawAxis');
 function displayWindow (canvas) {
   const topicList = document.querySelector('.topics');
   const topicWindows = document.querySelectorAll('.topic-window');
+  const equation = document.getElementById('equation');
   let currentWindow = "velocity";
   let ctx = canvas.getContext("2d");
   // don't draw axis until topic has been picked
@@ -16,10 +17,12 @@ function displayWindow (canvas) {
         if (topicWindow == topicClicked) {
           topicWindow.classList.add('active');
           currentWindow = topicWindow.classList[1];
+          console.log(topicClicked);
+          equation.innerText = `${currentWindow}`;
         } else {
           topicWindow.classList.remove('active');
         }
-      })
+      });
       switch(currentWindow) {
         case "velocity":
           console.log("vel case");

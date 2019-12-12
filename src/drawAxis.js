@@ -8,13 +8,13 @@ const drawAxis = (ctx, xAxis = "Time", yAxis = "Distance", width = 400, height =
   ctx.lineTo(width / (width / 350) + 50 , height / (height / 350) + 50);
   ctx.stroke();
   ctx.lineWidth = 0.5;
-  for(let i = 1; i < 35; i ++) {
-    ctx.moveTo(50, 400 - (10 * i));
-    ctx.lineTo(400, 400 - (10 * i));
+  for(let i = 1; i < 10; i ++) {
+    ctx.moveTo(50, 400 - (35 * i));
+    ctx.lineTo(400, 400 - (35 * i));
   }
-  for (let j = 1; j < 35; j++) {
-    ctx.moveTo(50 + (10 * j), 50);
-    ctx.lineTo(50 + (10 * j), 400);
+  for (let j = 1; j < 10; j++) {
+    ctx.moveTo(50 + (35 * j), 50);
+    ctx.lineTo(50 + (35 * j), 400);
   }
   ctx.stroke();
   ctx.lineWidth = 1;

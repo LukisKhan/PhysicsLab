@@ -4,11 +4,13 @@
   "description": "## Background",
   "main": "index.js",
   "dependencies": {
+    "express": "^4.17.1",
     "webpack": "^4.41.1"
   },
   "scripts": {
-    "postinstall": "npm run webpack",
-    "webpack": "webpack --watch --mode=development"
+    "webpack": "webpack --watch --mode=development",
+    "postinstall": "webpack -p",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

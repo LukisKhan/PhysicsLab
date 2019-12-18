@@ -1,6 +1,6 @@
 const particle = require('./particle');
 
-function velocity (ctx, particle, maxX = 400, maxY = 400) {
+function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
   // console.log(particle)
   const updatePos = (particle) => {
     let {pos, vel, accel }= particle;
@@ -14,6 +14,16 @@ function velocity (ctx, particle, maxX = 400, maxY = 400) {
       pos = [pos[0] + vel[0], pos[1] + vel[1]];
     }
     return { ...particle, pos};
+  }
+  const pytha = (num1, num2) => {
+    let pythaNum = Math.sqrt(num1 * num1 + num2* num2);
+    return pythaNum;
+  }
+  const toScaleX = (num, maxX = 350) => {
+    return ((num - 100) / 350 * maxX).toFixed(1);
+  }
+  const toScaleY = (num, maxY = 350) => {
+    return ((400 - num) / 350 * maxY).toFixed(1);
   }
   const animate = () => {
     let animationId = requestAnimationFrame(animate);
@@ -29,8 +39,16 @@ function velocity (ctx, particle, maxX = 400, maxY = 400) {
     ctx.beginPath();
     ctx.arc(posX, posY, 2, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
+    ctx.clearRect(440, 0, 200, 400);
+    let actualX = toScaleX(posX, maxX);
+    let actualY = toScaleY(posY, maxY);
+    ctx.font = "15px Arial"
+    ctx.fillText(`Distance: ${actualY} (m)`, 460, 100);
+    ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
+    ctx.fillText(`Velocity: ${actualVel} (m/s)`, 460, 160);
     // ctx.lineTo(prevPos);
-    if (particle.pos[0] > 399 || particle.pos[1] < 51 ) {
+    ctx.font = "20px Arial"
+    if (particle.pos[0] > 449 || particle.pos[1] < 51 ) {
       cancelAnimationFrame(animationId);
     }
   }

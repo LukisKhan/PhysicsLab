@@ -5,6 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // canvas.height = window.innerHeight;
   // canvas.width = window.innerWidth;
   canvas.height = 450;
-  canvas.width = 450;
+  canvas.width = 600;
   displayWindow(canvas);
 })

@@ -27,16 +27,19 @@ function displayWindow (canvas) {
         case "velocity":
           console.log("vel case");
           // ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
           break;
         case "acceleration":
           console.log("accel case");
           // ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, 2000, 2000);
           submitAccelForm(ctx);
           break;
         default:
           console.log("default case");
           // ctx = canvas.getContext("2d");
+          ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
       }
     }

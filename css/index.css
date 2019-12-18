@@ -51,11 +51,12 @@
 }
 
 .input-window{ 
-  border: 2px solid black;
+  /* border: 2px solid black; */
   /* width: 250px; */
   margin: 10px 0px 0px 0px;
+  padding: 20px;
   border-radius: 5%;
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
 }
 /* .input-window label{
   display: block;
@@ -68,26 +69,46 @@
   background-color: goldenrod;
 }
 input {
-  background-color: thistle;
+  background-color: white;
+  margin: 10px;
+}
+label{
+  margin: 10px;
 }
 .variables {
   display: flex;
   flex-direction: row;
+  font-size: 20px;
+  justify-content: space-evenly;
 }
 label {
-  color: blue;
+  color: white;
 }
 .known-box {
   display: flex;
-  flex-direction: column;
   padding: 20px;
+  margin: 20px;
+  border-radius: 5%;
   border: 1px solid green;
-  background-color: teal;
+  background-color: rgb(0, 0, 209);
+  justify-content: space-between;
 }
 .solve-box {
   display: flex;
   flex-direction: column;
+  background-color: teal;
+  border-radius: 5%;
   padding: 20px;
+  margin: 20px;
+}
+button {
+  background-color: red;
+  border-radius: 5%;
+  padding: 20px;
+  margin: 20px;
+}
+button:hover {
+  background-color: rgb(117, 21, 21);
 }
 canvas{
   /* width: 100%;

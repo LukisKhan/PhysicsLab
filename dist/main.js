@@ -95,30 +95,49 @@
 
 const particle = __webpack_require__(/*! ./particle */ "./src/particle.js");
 
-function acceleration(ctx, particle) {
+function acceleration(ctx, particle, actualAccel, maxX = 400, maxY = 400) {
   // let particles = Array(1)
   //   .fill(true)
   //   .map(() => particle([0,100], [1,0], [.8,0]) )
-
+  const startVel = particle.vel[1];
   const updatePos = (particle) => {
     let { pos, vel, accel } = particle;
-    pos = [pos[0] + vel[0], pos[1] + vel[1]]
-    vel = [vel[0] + accel[0], vel[1] + accel[1]]
-    // console.log(particle);
+    pos = [pos[0] + vel[0], pos[1] - vel[1]]
+    vel = [vel[0], vel[1] + accel[1]]
+    console.log(particle);
     return { ...particle, pos, vel };
+  }
+  const toScaleX = (num, maxX = 350) => {
+    return ((num - 100) / 350 * maxX).toFixed(1);
+  }
+  const toScaleY = (num, maxY = 350) => {
+    return ((400 - num) / 350 * maxY).toFixed(1);
   }
   const animate = () => {
     let animationId = requestAnimationFrame(animate);
+    let prevPos = particle.pos;
     particle = updatePos(particle)
     let posX = particle.pos[0];
     let posY = particle.pos[1];
-    ctx.beginPath();
-    ctx.arc(posX, posY, 6, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.moveTo(prevPos[0], prevPos[1]);
+    ctx.lineTo(particle.pos[0], particle.pos[1]);
     ctx.stroke();
-    // ctx.fillText(`${posX}`, posX, posY);
-    // if (particle.pos[0] > 700 || particle.pos[1] > 700) {
-    //   cancelAnimationFrame(animationId);
-    // }
+    ctx.beginPath();
+    ctx.arc(posX, posY, 1, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.stroke();
+    ctx.clearRect(440, 0, 200, 400);
+    let actualX = toScaleX(posX, maxX);
+    let actualY = toScaleY(posY, maxY);
+    ctx.font = "15px Arial"
+    ctx.fillText(`Distance: ${actualY} (m/s)`, 460, 100);
+    ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
+    ctx.fillText(`Start vel: ${startVel} (m/s)`, 460, 160);
+    ctx.fillText(`End vel: ${particle.vel[1]} (m/s)`, 460, 190);
+    ctx.fillText(`Accel: ${actualAccel} (m/s)`, 460, 220);
+    ctx.font = "20px Arial"
+    if (particle.pos[0] > 449 || particle.pos[1] < 51) {
+      cancelAnimationFrame(animationId);
+    }
   }
   animate()
 }
@@ -302,24 +321,23 @@ module.exports = particle
 /***/ (function(module, exports, __webpack_require__) {
 
 const acceleration = __webpack_require__(/*! ./acceleration */ "./src/acceleration.js");
+const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
+const drawUneven = __webpack_require__(/*! ./drawUneven */ "./src/drawUneven.js");
 
 function submitAccelForm(ctx) {
+  ctx.clearRect(0, 0, 2000, 2000);
+  drawAxis(ctx);
   const inputForm = document.forms['accel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let particle = { pos: [], vel: [], accel: [] };
-    const posValues = inputForm.querySelectorAll("#pos").forEach(valueNode => {
-      // console.log(valueNode);
-      particle.pos.push(parseInt(valueNode.value) || 0)
-    });
-    const velValues = inputForm.querySelectorAll("#vel").forEach(valueNode => {
-      particle.vel.push(parseInt(valueNode.value) || 0)
-    });
-    const accelValues = inputForm.querySelectorAll("#accel").forEach(valueNode => {
-      particle.accel.push(parseInt(valueNode.value) || 0)
-    });
+    let vel = parseInt(document.getElementsByClassName("accel-window-vel")[0].value);
+    let time = parseInt(document.getElementsByClassName("accel-window-time")[0].value);
+    let accelAns = vel / time;
+    let particle = { pos: [100, 400], vel: [1, vel] , accel: [1, accelAns] };
+
     ctx.clearRect(0, 0, 2000, 2000)
-    acceleration(ctx, particle);
+    drawAxis(ctx, undefined, undefined, 400, 400);
+    acceleration(ctx, particle, accelAns);
   })
 }
 
@@ -411,10 +429,10 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     }
     return { ...particle, pos};
   }
-  const pytha = (num1, num2) => {
-    let pythaNum = Math.sqrt(num1 * num1 + num2* num2);
-    return pythaNum;
-  }
+  // const pytha = (num1, num2) => {
+  //   let pythaNum = Math.sqrt(num1 * num1 + num2* num2);
+  //   return pythaNum;
+  // }
   const toScaleX = (num, maxX = 350) => {
     return ((num - 100) / 350 * maxX).toFixed(1);
   }
@@ -433,7 +451,7 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     ctx.lineTo(particle.pos[0], particle.pos[1]);
     ctx.stroke();
     ctx.beginPath();
-    ctx.arc(posX, posY, 2, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.arc(posX, posY, 1, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
     ctx.clearRect(440, 0, 200, 400);
     let actualX = toScaleX(posX, maxX);
@@ -442,7 +460,6 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     ctx.fillText(`Distance: ${actualY} (m)`, 460, 100);
     ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
     ctx.fillText(`Velocity: ${actualVel} (m/s)`, 460, 160);
-    // ctx.lineTo(prevPos);
     ctx.font = "20px Arial"
     if (particle.pos[0] > 449 || particle.pos[1] < 51 ) {
       cancelAnimationFrame(animationId);

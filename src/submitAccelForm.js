@@ -1,22 +1,21 @@
 const acceleration = require('./acceleration');
+const drawAxis = require('./drawAxis');
+const drawUneven = require('./drawUneven');
 
 function submitAccelForm(ctx) {
+  ctx.clearRect(0, 0, 2000, 2000);
+  drawAxis(ctx);
   const inputForm = document.forms['accel-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let particle = { pos: [], vel: [], accel: [] };
-    const posValues = inputForm.querySelectorAll("#pos").forEach(valueNode => {
-      // console.log(valueNode);
-      particle.pos.push(parseInt(valueNode.value) || 0)
-    });
-    const velValues = inputForm.querySelectorAll("#vel").forEach(valueNode => {
-      particle.vel.push(parseInt(valueNode.value) || 0)
-    });
-    const accelValues = inputForm.querySelectorAll("#accel").forEach(valueNode => {
-      particle.accel.push(parseInt(valueNode.value) || 0)
-    });
+    let vel = parseInt(document.getElementsByClassName("accel-window-vel")[0].value);
+    let time = parseInt(document.getElementsByClassName("accel-window-time")[0].value);
+    let accelAns = vel / time;
+    let particle = { pos: [100, 400], vel: [1, vel] , accel: [1, accelAns] };
+
     ctx.clearRect(0, 0, 2000, 2000)
-    acceleration(ctx, particle);
+    drawAxis(ctx, undefined, undefined, 400, 400);
+    acceleration(ctx, particle, accelAns);
   })
 }
 

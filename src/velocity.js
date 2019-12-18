@@ -15,10 +15,10 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     }
     return { ...particle, pos};
   }
-  const pytha = (num1, num2) => {
-    let pythaNum = Math.sqrt(num1 * num1 + num2* num2);
-    return pythaNum;
-  }
+  // const pytha = (num1, num2) => {
+  //   let pythaNum = Math.sqrt(num1 * num1 + num2* num2);
+  //   return pythaNum;
+  // }
   const toScaleX = (num, maxX = 350) => {
     return ((num - 100) / 350 * maxX).toFixed(1);
   }
@@ -37,7 +37,7 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     ctx.lineTo(particle.pos[0], particle.pos[1]);
     ctx.stroke();
     ctx.beginPath();
-    ctx.arc(posX, posY, 2, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.arc(posX, posY, 1, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
     ctx.clearRect(440, 0, 200, 400);
     let actualX = toScaleX(posX, maxX);
@@ -46,7 +46,6 @@ function velocity(ctx, particle, actualVel, maxX = 400, maxY = 400) {
     ctx.fillText(`Distance: ${actualY} (m)`, 460, 100);
     ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
     ctx.fillText(`Velocity: ${actualVel} (m/s)`, 460, 160);
-    // ctx.lineTo(prevPos);
     ctx.font = "20px Arial"
     if (particle.pos[0] > 449 || particle.pos[1] < 51 ) {
       cancelAnimationFrame(animationId);

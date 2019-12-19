@@ -78,7 +78,43 @@
             </div> -->
           </div>
           <div class="topic-window gravity" >Gravity window</div>
-          <div class="topic-window projectile" >Projectile window</div>
+          <div class="topic-window projectile" >
+            <div class="forms input-window">
+              <form name="projectile-inputs">
+                <div class="variables">
+                  <div class="known-box-projectile">
+                    <div>
+                      <div>Enter any known variables</div>
+                      <div>
+                        <label>Initial Velocity</label>
+                        <input type="text" class="projectile-window-init-vel" placeholder="In meters/sec">
+                      </div>
+                      <div>
+                        <label>Final Velocity</label>
+                        <input type="text" class="projectile-window-final-vel" placeholder="In meters/sec">
+                      </div>
+                      <div>
+                        <label>Time</label>
+                        <input type="text" class="projectile-window-time" placeholder="In seconds">
+                      </div>
+                      <div>
+                        <label>Acceleration</label>
+                        <input type="text" class="projectile-window-accel" placeholder="In meters/sec2">
+                      </div>
+                      <div>
+                        <label>Change In Distance</label>
+                        <input type="text" class="projectile-window-init-vel" placeholder="In meters">
+                      </div>
+                    </div>
+                  </div>
+                  <button>Solve For Unknown</button>
+                  <!-- <div class="solve-box">
+                    <label>Acceleration</label>
+                  </div> -->
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
         <!-- </form> -->
         <canvas id="my-canvas"></canvas>

@@ -104,7 +104,7 @@ function acceleration(ctx, particle, actualAccel, maxX = 400, maxY = 400) {
     let { pos, vel, accel } = particle;
     pos = [pos[0] + vel[0], pos[1] - vel[1]]
     vel = [vel[0], vel[1] + accel[1]]
-    console.log(particle);
+    // console.log(particle);
     return { ...particle, pos, vel };
   }
   const toScaleX = (num, maxX = 350) => {

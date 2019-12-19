@@ -94,6 +94,13 @@ label {
   background-color: rgb(0, 0, 209);
   justify-content: space-between;
 }
+.known-box-projectile{
+  border: 1px solid green;
+  background-color: rgb(0, 0, 209);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
 .solve-box {
   display: flex;
   flex-direction: column;

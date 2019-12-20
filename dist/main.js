@@ -161,6 +161,7 @@ module.exports = acceleration;
 
 const submitForm = __webpack_require__(/*! ./submitForm */ "./src/submitForm.js");
 const submitAccelForm = __webpack_require__(/*! ./submitAccelForm */ "./src/submitAccelForm.js");
+const submitProjForm = __webpack_require__(/*! ./submitProjForm */ "./src/submitProjForm.js");
 const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
 
 function displayWindow (canvas) {
@@ -187,19 +188,21 @@ function displayWindow (canvas) {
       switch(currentWindow) {
         case "velocity":
           console.log("vel case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
           break;
         case "acceleration":
           console.log("accel case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitAccelForm(ctx);
           break;
+        case "projectile":
+          console.log("projectile case");
+          ctx.clearRect(0, 0, 2000, 2000);
+          submitProjForm(ctx);
+          break;
         default:
           console.log("default case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
       }
@@ -313,6 +316,34 @@ module.exports = particle
 
 /***/ }),
 
+/***/ "./src/projectile.js":
+/*!***************************!*\
+  !*** ./src/projectile.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const particle = __webpack_require__(/*! ./particle */ "./src/particle.js");
+
+function projectile(ctx, particle, actualAccel, maxX = 400, maxY = 400) {
+  const toScaleX = (num, maxX = 350) => {
+    return ((num - 100) / 350 * maxX).toFixed(1);
+  }
+  const toScaleY = (num, maxY = 350) => {
+    return ((400 - num) / 350 * maxY).toFixed(1);
+  }
+  const updatePos = (particle) => {
+  }
+  const animate = () => {
+  }
+  animate()
+}
+
+
+module.exports = projectile;
+
+/***/ }),
+
 /***/ "./src/submitAccelForm.js":
 /*!********************************!*\
   !*** ./src/submitAccelForm.js ***!
@@ -402,6 +433,31 @@ function submitForm (ctx) {
   })
 }
 module.exports = submitForm;
+
+/***/ }),
+
+/***/ "./src/submitProjForm.js":
+/*!*******************************!*\
+  !*** ./src/submitProjForm.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const projectile = __webpack_require__(/*! ./projectile */ "./src/projectile.js");
+const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
+// const drawUneven = require('./drawUneven');
+
+function submitProjForm(ctx) {
+  ctx.clearRect(0, 0, 2000, 2000);
+  drawAxis(ctx);
+  const inputForm = document.forms['accel-inputs'];
+  inputForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // projectile(ctx, particle, accelAns);
+  })
+}
+
+module.exports = submitProjForm;
 
 /***/ }),
 

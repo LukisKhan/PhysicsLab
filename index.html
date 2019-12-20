@@ -64,18 +64,6 @@
                 </div>
               </form>
             </div>
-            <!-- <div class="output-window">
-              <div class="forms">
-                <label>Position X</label>
-                <input type="text" id="pos">
-                <label>Position Y</label>
-                <input type="text" id="pos">
-                <label>Velocity X</label>
-                <input type="text" id="vel">
-                <label>Velocity Y</label>
-                <input type="text" id="vel">
-              </div>
-            </div> -->
           </div>
           <div class="topic-window gravity" >Gravity window</div>
           <div class="topic-window projectile" >
@@ -83,9 +71,26 @@
               <form name="projectile-inputs">
                 <div class="variables">
                   <div class="known-box-projectile">
-                    <div>
-                      <div>Enter any known variables</div>
-                      <div>
+                    <div>Enter any known variables</div>
+                    <div class="projectile-input-label">
+                      <div class="projectile-label-div">
+                        <label>Initial Velocity</label>
+                        <label>Final Velocity</label>
+                        <label>Change In Distance</label>
+                        <label>Initial Height</label>
+                        <label>Acceleration</label>
+                        <label>Time</label>
+                      </div>
+                      <div class="projectile-input-div">
+                        <input type="text" class="projectile-window-init-vel" placeholder="In meters/sec">
+                        <input type="text" class="projectile-window-final-vel" placeholder="In meters/sec">
+                        <input type="text" class="projectile-window-distance" placeholder="In meters">
+                        <input type="text" class="projectile-window-height" placeholder="In meters">
+                        <input type="text" class="projectile-window-accel" placeholder="In meters/sec2">
+                        <input type="text" class="projectile-window-time" placeholder="In seconds">
+                      </div>
+                    </div>
+                      <!-- <div>
                         <label>Initial Velocity</label>
                         <input type="text" class="projectile-window-init-vel" placeholder="In meters/sec">
                       </div>
@@ -105,18 +110,17 @@
                         <label>Change In Distance</label>
                         <input type="text" class="projectile-window-init-vel" placeholder="In meters">
                       </div>
-                    </div>
+                      <div>
+                        <label>Initial Height</label>
+                        <input type="text" class="projectile-window-init-vel" placeholder="In meters">
+                      </div> -->
                   </div>
                   <button>Solve For Unknown</button>
-                  <!-- <div class="solve-box">
-                    <label>Acceleration</label>
-                  </div> -->
                 </div>
               </form>
             </div>
           </div>
         </div>
-        <!-- </form> -->
         <canvas id="my-canvas"></canvas>
       </div>
     </div>

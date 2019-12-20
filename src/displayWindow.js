@@ -1,5 +1,6 @@
 const submitForm = require('./submitForm');
 const submitAccelForm = require('./submitAccelForm');
+const submitProjForm = require('./submitProjForm');
 const drawAxis = require('./drawAxis');
 
 function displayWindow (canvas) {
@@ -26,19 +27,21 @@ function displayWindow (canvas) {
       switch(currentWindow) {
         case "velocity":
           console.log("vel case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
           break;
         case "acceleration":
           console.log("accel case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitAccelForm(ctx);
           break;
+        case "projectile":
+          console.log("projectile case");
+          ctx.clearRect(0, 0, 2000, 2000);
+          submitProjForm(ctx);
+          break;
         default:
           console.log("default case");
-          // ctx = canvas.getContext("2d");
           ctx.clearRect(0, 0, 2000, 2000);
           submitForm(ctx);
       }

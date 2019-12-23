@@ -325,20 +325,64 @@ module.exports = particle
 
 const particle = __webpack_require__(/*! ./particle */ "./src/particle.js");
 
-function projectile(ctx, particle, actualAccel, maxX = 400, maxY = 400) {
+function projectile(ctx, particle, maxX = 400, maxY = 400) {
   const toScaleX = (num, maxX = 350) => {
     return ((num - 100) / 350 * maxX).toFixed(1);
   }
   const toScaleY = (num, maxY = 350) => {
     return ((400 - num) / 350 * maxY).toFixed(1);
   }
-  const updatePos = (particle) => {
+
+  //helper method for chooseEquation, 
+  //return true if equation is solvable based on known variables
+  const allButOne = (...variables) => {
+    let numUnknown = 0;
+    (variables).forEach((ele) => {
+      if(!ele && ele !== 0) numUnknown++;
+    });
+    return numUnknown === 1;
   }
+
+  //Choose euqation to solve if all variables are known except 1;
+  const chooseEquation = (particle) => {
+    let { initVel, finalVel, distance, height, accelInput, time } = particle;
+    if (allButOne(finalVel, initVel, accelInput, time)) {
+      console.log(firstEquation(finalVel, initVel, accelInput, time));
+    }
+  }
+
+  const firstEquation = (Vf, Vi, a, t) => {
+    if(!Vf) {
+      console.log("Final Velocity");
+      return Vi + a * t;
+    } else if(!Vi) {
+      console.log("Initial Velocity");
+      return Vf - a * t;
+    } else if (!a) {
+      console.log("Acceleration");
+      return (Vf - Vi) / t;
+    } else {
+      console.log("Time");
+      return (Vf - Vi) / a;
+    }
+  }
+  
+  chooseEquation(particle);
+///////Animate after solving
+  const updatePos = (particle) => {
+
+  }
+
   const animate = () => {
+
   }
   animate()
 }
-
+//EQUATIONS
+// Vf = Vi + at
+// X = ((Vf + Vi) / 2) * t
+// X = Vi * t + (1/2 * a * tt)
+// Vf2 = Vi2 + (2 * a * X)
 
 module.exports = projectile;
 
@@ -450,10 +494,30 @@ const drawAxis = __webpack_require__(/*! ./drawAxis */ "./src/drawAxis.js");
 function submitProjForm(ctx) {
   ctx.clearRect(0, 0, 2000, 2000);
   drawAxis(ctx);
-  const inputForm = document.forms['accel-inputs'];
+  const inputForm = document.forms['projectile-inputs'];
   inputForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    // projectile(ctx, particle, accelAns);
+    const initVel = parseFloat(document.getElementById('projectile-window-init-vel').value);
+    const finalVel = parseFloat(document.getElementById('projectile-window-final-vel').value);
+    const distance = parseFloat(document.getElementById('projectile-window-distance').value);
+    const height = parseFloat(document.getElementById('projectile-window-height').value);
+    const accelInput = parseFloat(document.getElementById('projectile-window-accel').value);
+    const time = parseFloat(document.getElementById('projectile-window-time').value);
+    let particle = { 
+      pos: [100, 400], 
+      vel: [0, 0], 
+      accel: [0, 0], 
+      initVel,
+      finalVel,
+      distance,
+      height,
+      accelInput,
+      time
+    };
+    // ctx.clearRect(0, 0, 2000, 2000)
+    // drawAxis(ctx, undefined, undefined, 400, 400);
+    // console.log(particle);
+    projectile(ctx, particle);
   })
 }
 

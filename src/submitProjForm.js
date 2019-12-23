@@ -16,8 +16,8 @@ function submitProjForm(ctx) {
     const time = parseFloat(document.getElementById('projectile-window-time').value);
     let particle = { 
       pos: [100, 400], 
-      vel: [0, 0], 
-      accel: [0, 0], 
+      vel: [3, 60], 
+      accel: [0, -10], 
       initVel,
       finalVel,
       distance,

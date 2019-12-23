@@ -49,6 +49,7 @@ function projectile(ctx, particle, maxX = 400, maxY = 400) {
     if (allButOne(finalVel, initVel, accelInput, distance)) {
       console.log(fourthEquation(finalVel, initVel, accelInput, distance));
     }
+
   }
 
   // Vf = Vi + at
@@ -130,18 +131,50 @@ function projectile(ctx, particle, maxX = 400, maxY = 400) {
     }
   }
   
-  chooseEquation(particle);
   
+  chooseEquation(particle);
   ////////////////////////////////////////////////PICK UP HERE NEXT SESSION
   ///////Animate after solving
-  const updatePos = (particle) => {
-    
+  // CURRENTLY DRAW GRAPH WITH HARD CODED POS, VEL, ACCEL
+  const updateHeightVsDistance = (particle) => {
+    let { pos, vel, accel, initVel, finalVel, distance, height, accelInput, time  } = particle;
+    pos = [pos[0] + vel[0], pos[1] - vel[1]]
+    vel = [vel[0], vel[1] + accel[1]]
+    console.log(pos);
+    // console.log(pos);
+    return { ...particle, pos, vel };
   }
-
+  
   const animate = () => {
-
+    let animationId = requestAnimationFrame(animate);
+    // let { initVel, finalVel, distance, height, accelInput, time } = particle;
+    let prevPos = particle.pos;
+    if (particle.pos[0] === 100 || particle.pos[1] < 400) {
+      particle = updateHeightVsDistance(particle);
+    }
+    let posX = particle.pos[0];
+    let posY = particle.pos[1];
+    ctx.moveTo(prevPos[0], prevPos[1]);
+    ctx.lineTo(particle.pos[0], particle.pos[1]);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(posX, posY, 1, 0 * Math.PI, 2 * Math.PI, true);
+    ctx.stroke();
+    ctx.clearRect(440, 0, 200, 400);
+    // let actualX = toScaleX(posX, maxX);
+    // let actualY = toScaleY(posY, maxY);
+    // ctx.font = "15px Arial"
+    // ctx.fillText(`Distance: ${actualY} (m/s)`, 460, 100);
+    // ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
+    // ctx.fillText(`Start vel: ${initVel} (m/s)`, 460, 160);
+    // ctx.fillText(`End vel: ${particle.vel[1]} (m/s)`, 460, 190);
+    // ctx.fillText(`Accel: ${actualAccel} (m/s)`, 460, 220);
+    // ctx.font = "20px Arial"
+    if (particle.pos[0] > 449 || particle.pos[1] < 51 || particle.pos[1] > 400) {
+      cancelAnimationFrame(animationId);
+    }
   }
-  animate()
+  animate();
 }
 
 module.exports = projectile;

@@ -1,5 +1,5 @@
 const displayWindow = require('./displayWindow');
-
+//need to add favicon via webpack or react
 document.addEventListener('DOMContentLoaded', () => {
   let canvas = document.querySelector('canvas');
   // canvas.height = window.innerHeight;

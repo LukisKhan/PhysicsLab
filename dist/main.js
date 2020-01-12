@@ -278,7 +278,7 @@ module.exports = drawUneven;
 /***/ (function(module, exports, __webpack_require__) {
 
 const displayWindow = __webpack_require__(/*! ./displayWindow */ "./src/displayWindow.js");
-
+//need to add favicon via webpack or react
 document.addEventListener('DOMContentLoaded', () => {
   let canvas = document.querySelector('canvas');
   // canvas.height = window.innerHeight;

@@ -1,8 +1,23 @@
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: 40px;
+  border-bottom: 1px solid black;
+}
+h1 {
+  margin: 0px;
+  color: teal;
+}
+img {
+  margin-right: 10px;
+}
 #root {
   display: flex;
   width: 100vw;
-  height: 100vh;
-  border: 1px solid black;
+  height: auto;
+  /* border: 1px solid black; */
   color: white;
   font-weight: bold;
   text-align: center;
@@ -135,4 +150,29 @@ canvas{
 .projectile-input-div {
   display: flex;
   flex-direction: column;
+}
+.instructions{
+  height: 200px;
+  color: black;
+}
+.footer-root {
+  background-color: rgb(86, 119, 108);
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(185, 221, 230);
+  width: 100vw;
+}
+
+.footer-root h3 {
+  color: rgb(227, 243, 248);
+}
+
+.footer-root li {
+  list-style: none;
+  padding: 2px 0px;
+}
+
+.footer-root ul {
+  margin: 0px;
+  padding: 0px;
 }

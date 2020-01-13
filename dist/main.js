@@ -288,6 +288,10 @@ document.addEventListener('DOMContentLoaded', () => {
   displayWindow(canvas);
 })
 
+
+//Need links for footer
+//Need general instructions 
+
 /***/ }),
 
 /***/ "./src/particle.js":
@@ -486,15 +490,15 @@ function projectile(ctx, particle, maxX = 400, maxY = 400) {
     ctx.arc(posX, posY, 1, 0 * Math.PI, 2 * Math.PI, true);
     ctx.stroke();
     ctx.clearRect(440, 0, 200, 400);
+    ctx.font = "15px Arial"
     // let actualX = toScaleX(posX, maxX);
     // let actualY = toScaleY(posY, maxY);
-    // ctx.font = "15px Arial"
     // ctx.fillText(`Distance: ${actualY} (m/s)`, 460, 100);
     // ctx.fillText(`Time: ${actualX} (s)`, 460, 130);
     // ctx.fillText(`Start vel: ${initVel} (m/s)`, 460, 160);
     // ctx.fillText(`End vel: ${particle.vel[1]} (m/s)`, 460, 190);
     // ctx.fillText(`Accel: ${actualAccel} (m/s)`, 460, 220);
-    // ctx.font = "20px Arial"
+    ctx.font = "20px Arial";
     if (particle.pos[0] > 449 || particle.pos[1] < 51 || particle.pos[1] > 400) {
       cancelAnimationFrame(animationId);
     }

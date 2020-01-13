@@ -152,8 +152,13 @@ canvas{
   flex-direction: column;
 }
 .instructions{
-  height: 200px;
+  height: auto;
   color: black;
+  display: flex;
+  justify-content: center;
+}
+.inner-instructions{
+  max-width: 600px;
 }
 .footer-root {
   background-color: rgb(86, 119, 108);
@@ -175,4 +180,18 @@ canvas{
 .footer-root ul {
   margin: 0px;
   padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(185, 221, 230);
+}
+a:active{
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
 }

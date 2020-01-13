@@ -8,3 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   canvas.width = 600;
   displayWindow(canvas);
 })
+
+
+//Need links for footer
+//Need general instructions 

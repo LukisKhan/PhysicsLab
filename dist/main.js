@@ -289,9 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-//Need links for footer
-//Need general instructions 
-
 /***/ }),
 
 /***/ "./src/particle.js":

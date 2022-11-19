@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/LukisKhan/PhysicsLab#readme",
   "devDependencies": {
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "engines": {
     "node": "12.5.0",
